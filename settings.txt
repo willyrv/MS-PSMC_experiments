@@ -12,3 +12,5 @@ psmc -p 4+25*2+4+6 -t 15 -N 25 -r 5
 100
 # Number of experiments
 100
+# Generation Time
+28
