@@ -1,0 +1,14 @@
+# value for Mu
+2.5e-8
+# ms command (don't forget the -l option)
+msHOT 2 100 -t 30000 -r 6000 30000000 -eN 0.01 0.1 -eN 0.06 1 -eN 0.2 0.5 -eN 1 1 -eN 2 2 -l
+# psmc command (without the -o parameter and without input filename)
+psmc -p 4+25*2+4+6 -t 15 -N 25 -r 5
+# x_min, x_max, y_min, y_max
+2, 10000000, 0, 50000
+# scalling factor (This is for the plot and is usually set to N0)
+1
+# bin size (this is the "s" parameter in the psmc)
+100
+# Number of experiments
+100
