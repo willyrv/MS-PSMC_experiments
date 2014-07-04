@@ -280,37 +280,5 @@ class accuracy(object):
 			sum_temp += (abs(N0_i-N1_i)/(N0_i+N1_i))*(math.log(x_vect[i+1], base)-math.log(x_vect[i], base))
 		result = float(sum_temp)/(math.log(t1, base)-math.log(t0, base))
 		return result
-        
-def main_one_exp():
-	g_s = global_settings()
-	# First we execute the ms-command:
-	os.system(g_s.original_ms_command + '> simulation_result.ms')
-	number_of_hap = int(g_s.original_ms_command.split(' ')[1])
-	a = open('simulation_result.ms', 'r')
-	a = a.read()
-	a = a.split('\n')
-	conv = converter()
-	for A in range(number_of_hap):
-		for B in range(A+1, number_of_hap):
-			conv.ms2psmcfa('simulation_result.ms', A, B, g_s.s)
-			os.system(g_s.psmc_command + ' -o output'+A.__str__()+B.__str__()+'.psmc result'+A.__str__()+B.__str__()+'.psmcfa')
-	conv.write_results(number_of_hap, 1, g_s.psmc_N)
-	p = plotter()
-	p.plot_ms('results.txt', g_s.scaling_factor, g_s.Mu, g_s.x_min, g_s.x_max, g_s.y_min, g_s.y_max)
-
-def main(number_of_times):
-	g_s = global_settings()
-	for i in range(number_of_times):
-		os.system(g_s.original_ms_command + ' > simulation'+(i+1).__str__()+'_result.ms')
-		os.system('./ms2psmcfa.pl simulation'+(i+1).__str__()+'_result.ms > input'+(i+1).__str__()+'.psmcfa' )
-		os.system(g_s.psmc_command + ' -o output'+(i+1).__str__()+'.psmc'+' input'+(i+1).__str__()+'.psmcfa')
-	conv = converter()
-	conv.write_results(2, number_of_times, g_s.original_ms_command, g_s.psmc_N)
-	p = plotter()
-	p.plot_ms('results.txt', g_s.scaling_factor, g_s.Mu, g_s.x_min, g_s.x_max, g_s.y_min, g_s.y_max)
-
-if __name__ == "__main__":
-	main(1)
-
 
   
